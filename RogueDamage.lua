@@ -1,17 +1,17 @@
 -- DEBUG TOOL
-local function printTable(table, indent)
-  indent = indent or 0
-  local indentStr = string.rep(" ", indent)
-
-  for key, value in pairs(table) do
-    if type(value) == "table" then
-      print(indentStr .. key .. ":")
-      printTable(value, indent + 4)
-    else
-      print(indentStr .. key .. ": " .. tostring(value))
-    end
-  end
-end
+-- local function printTable(table, indent)
+--   indent = indent or 0
+--   local indentStr = string.rep(" ", indent)
+--
+--   for key, value in pairs(table) do
+--     if type(value) == "table" then
+--       print(indentStr .. key .. ":")
+--       printTable(value, indent + 4)
+--     else
+--       print(indentStr .. key .. ": " .. tostring(value))
+--     end
+--   end
+-- end
 
 local spellReqs = {}
 
@@ -272,6 +272,12 @@ local textLines = {
 }
 
 local printLines = function()
+  local className = UnitClass("player")
+  if className ~= "Rogue" then
+    f:Hide()
+    return
+  end
+
   local targetHealth = UnitHealth("target")
   targetHealthText:SetText("Target Health: " .. targetHealth)
   local line, damages = createPrintList()
