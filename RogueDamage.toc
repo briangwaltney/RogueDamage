@@ -1,0 +1,9 @@
+## Interface: 11403
+## Title: |Rogue Spell Damage Tracker|r
+## Notes: We will see if this works
+## Author: balanced.rocks
+## Version: 0.0.1
+## IconTexture: 4675637
+## OptionalDeps: ElvUI, ElvUI_Config
+
+RogueDamage.lua
