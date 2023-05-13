@@ -13,6 +13,36 @@ local function printTable(table, indent)
   end
 end
 
+local spellReqs = {}
+
+spellReqs["Backstab"] = function()
+  return true
+end
+
+spellReqs["Sinister Strike"] = function()
+  return true
+end
+
+spellReqs["Eviscerate"] = function()
+  return true
+end
+
+spellReqs["Ambush"] = function()
+  return IsStealthed()
+end
+
+spellReqs["Ghostly Strike"] = function()
+  return true
+end
+
+spellReqs["Garrote"] = function()
+  return IsStealthed()
+end
+
+spellReqs["Rupture"] = function()
+  return true
+end
+
 local spells = {}
 
 local low, high = UnitDamage("player")
@@ -155,7 +185,10 @@ local function createPrintList()
   local dmgList = getSpellList()
   for key, _ in pairs(dmgList) do
     local spellDmg = dmgList[key][comboPoints + 1]
-    if IsUsableSpell(key) and spellDmg > 0 then
+    if
+    -- IsUsableSpell(key) and
+        spellDmg > 0 and spellReqs[key]()
+    then
       currentDamage[key] = spellDmg
     end
   end
@@ -242,6 +275,10 @@ local printLines = function()
   local targetHealth = UnitHealth("target")
   targetHealthText:SetText("Target Health: " .. targetHealth)
   local line, damages = createPrintList()
+
+  -- length of line
+  local length = 0
+
   for i, pair in ipairs(damages) do
     if pair[2] >= targetHealth and targetHealth > 0 then
       textLines[i]:SetTextColor(0, 1, 0)
@@ -250,10 +287,13 @@ local printLines = function()
       textLines[i]:SetTextColor(1, 1, 1)
     end
     textLines[i]:SetText(line[i])
-    -- if line[i] == nil then
-    --   textLines[i]:SetText("")
-    -- end
+    length = length + 1
   end
+
+  for i = length + 1, 6 do
+    textLines[i]:SetText("")
+  end
+
   f:Show()
 end
 
@@ -272,5 +312,11 @@ end)
 local targetChange = CreateFrame("FRAME")
 targetChange:RegisterEvent("PLAYER_TARGET_CHANGED")
 targetChange:SetScript("OnEvent", function()
+  printLines()
+end)
+
+local stealthCheck = CreateFrame("FRAME")
+stealthCheck:RegisterEvent("UPDATE_STEALT")
+stealthCheck:SetScript("OnEvent", function()
   printLines()
 end)
