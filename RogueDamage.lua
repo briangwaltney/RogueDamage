@@ -232,37 +232,37 @@ local fontPath = "Fonts\\FRIZQT__.TTF"
 
 local targetHealthText = f:CreateFontString(nil, "OVERLAY")
 targetHealthText:SetPoint("TOPLEFT", 0, 0)
-targetHealthText:SetJustifyH("LEFT")
+targetHealthText:SetJustifyH("RIGHT")
 targetHealthText:SetFont(fontPath, 13)
 
 local text1 = f:CreateFontString(nil, "OVERLAY")
 text1:SetPoint("TOPLEFT", 0, -25)
-text1:SetJustifyH("LEFT")
+text1:SetJustifyH("RIGHT")
 text1:SetFont(fontPath, 16)
 
 local text2 = f:CreateFontString(nil, "OVERLAY")
 text2:SetPoint("TOPLEFT", 0, -50)
-text2:SetJustifyH("LEFT")
+text2:SetJustifyH("RIGHT")
 text2:SetFont(fontPath, 14)
 
 local text3 = f:CreateFontString(nil, "OVERLAY")
 text3:SetPoint("TOPLEFT", 0, -70)
-text3:SetJustifyH("LEFT")
+text3:SetJustifyH("RIGHT")
 text3:SetFont(fontPath, 14)
 
 local text4 = f:CreateFontString(nil, "OVERLAY")
 text4:SetPoint("TOPLEFT", 0, -90)
-text4:SetJustifyH("LEFT")
+text4:SetJustifyH("RIGHT")
 text4:SetFont(fontPath, 14)
 
 local text5 = f:CreateFontString(nil, "OVERLAY")
 text5:SetPoint("TOPLEFT", 0, -110)
-text5:SetJustifyH("LEFT")
+text5:SetJustifyH("RIGHT")
 text5:SetFont(fontPath, 14)
 
 local text6 = f:CreateFontString(nil, "OVERLAY")
 text6:SetPoint("TOPLEFT", 0, -130)
-text6:SetJustifyH("LEFT")
+text6:SetJustifyH("RIGHT")
 text6:SetFont(fontPath, 14)
 
 local textLines = {
