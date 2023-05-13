@@ -45,10 +45,13 @@ end
 
 local spells = {}
 
-local low, high = UnitDamage("player")
-local baseDamage = (low + high) / 2
+local getBaseDamage = function()
+  local low, high = UnitDamage("player")
+  local baseDamage = (low + high) / 2
+  return baseDamage
+end
 
-spells["Sinister Strike"] = function(id)
+spells["Sinister Strike"] = function(id, baseDamage)
   -- 1752
   local desc = GetSpellDescription(id)
   local addDamage = tonumber(string.match(desc, "%d+"))
@@ -81,7 +84,7 @@ spells["Eviscerate"] = function(id)
   return list
 end
 
-spells["Backstab"] = function(id)
+spells["Backstab"] = function(id, baseDamage)
   -- 53
   local desc = GetSpellDescription(id)
   local addDamage = tonumber(string.match(desc, "plus (%d+)"))
@@ -97,7 +100,7 @@ spells["Backstab"] = function(id)
   }
 end
 
-spells["Ambush"] = function(id)
+spells["Ambush"] = function(id, baseDamage)
   -- 8676
   local desc = GetSpellDescription(id)
   local addDamage = tonumber(string.match(desc, "plus (%d+)"))
@@ -112,9 +115,8 @@ spells["Ambush"] = function(id)
   }
 end
 
-spells["Ghostly Strike"] = function(id)
+spells["Ghostly Strike"] = function(_, baseDamage)
   -- 14278
-  local desc = GetSpellDescription(id)
   local dmg = math.floor(baseDamage * 1.5)
   return {
     dmg,
@@ -168,8 +170,9 @@ local function getSpellList()
     local _, _, offset, numSpells = GetSpellTabInfo(rank)
     for i = offset + 1, offset + numSpells do
       local spellType, _, dbSpellId = GetSpellBookItemName(i, "spell")
+      local baseDamage = getBaseDamage()
       if shouldParse(spellType) then
-        dmgList[spellType] = spells[spellType](dbSpellId)
+        dmgList[spellType] = spells[spellType](dbSpellId, baseDamage)
       end
     end
   end
