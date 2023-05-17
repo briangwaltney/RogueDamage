@@ -35,6 +35,10 @@ spellReqs["Ghostly Strike"] = function()
 	return true
 end
 
+spellReqs["Riposte"] = function()
+	return true
+end
+
 spellReqs["Garrote"] = function()
 	return IsStealthed()
 end
@@ -82,6 +86,19 @@ spells["Eviscerate"] = function(id)
 	end
 
 	return list
+end
+
+spells["Riposte"] = function()
+	local dmg = math.floor(baseDamage * 1.5)
+
+	return {
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+	}
 end
 
 spells["Backstab"] = function(id, baseDamage)
