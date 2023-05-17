@@ -58,15 +58,12 @@ spells["Sinister Strike"] = function(id, baseDamage)
 	local dmg = math.floor(baseDamage + addDamage)
 
 	return {
-		{
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-		},
-		1,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
 	}
 end
 
@@ -84,7 +81,7 @@ spells["Eviscerate"] = function(id)
 		end
 	end
 
-	return { list, 2 }
+	return list
 end
 
 spells["Backstab"] = function(id, baseDamage)
@@ -94,15 +91,12 @@ spells["Backstab"] = function(id, baseDamage)
 	local dmg = math.floor(baseDamage * 1.5 + addDamage)
 
 	return {
-		{
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-		},
-		3,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
 	}
 end
 
@@ -112,15 +106,12 @@ spells["Ambush"] = function(id, baseDamage)
 	local addDamage = tonumber(string.match(desc, "plus (%d+)"))
 	local dmg = math.floor(baseDamage * 2.5 + addDamage)
 	return {
-		{
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-		},
-		4,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
 	}
 end
 
@@ -128,15 +119,12 @@ spells["Ghostly Strike"] = function(_, baseDamage)
 	-- 14278
 	local dmg = math.floor(baseDamage * 1.5)
 	return {
-		{
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-			dmg,
-		},
-		5,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
+		dmg,
 	}
 end
 
@@ -145,15 +133,12 @@ spells["Garrote"] = function(id)
 	local desc = GetSpellDescription(id)
 	local dmg = tonumber(string.match(desc, "causing (%d+)"))
 	return {
-		{
-			dmg,
-			0,
-			0,
-			0,
-			0,
-			0,
-		},
-		6,
+		dmg,
+		0,
+		0,
+		0,
+		0,
+		0,
 	}
 end
 
@@ -166,7 +151,7 @@ spells["Rupture"] = function(id)
 		table.insert(list, dmg)
 	end
 
-	return { list, 7 }
+	return list
 end
 
 local function getSpellList()
@@ -188,8 +173,7 @@ local function getSpellList()
 			local baseDamage = getBaseDamage()
 			if shouldParse(spellType) then
 				dmgList[spellType] = {
-					spells[spellType](dbSpellId, baseDamage)[1],
-					spells[spellType](dbSpellId, baseDamage)[2],
+					spells[spellType](dbSpellId, baseDamage),
 				}
 			end
 		end
