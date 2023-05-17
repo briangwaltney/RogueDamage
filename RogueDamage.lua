@@ -24,7 +24,7 @@ spellReqs["Sinister Strike"] = function()
 end
 
 spellReqs["Eviscerate"] = function()
-	return not IsStealthed()
+	return true
 end
 
 spellReqs["Ambush"] = function()
@@ -40,7 +40,7 @@ spellReqs["Garrote"] = function()
 end
 
 spellReqs["Rupture"] = function()
-	return not IsStealthed()
+	return true
 end
 
 local spells = {}
@@ -167,11 +167,6 @@ spells["Rupture"] = function(id)
 	end
 
 	return { list, 7 }
-end
-
-local function getSpellDmg(key)
-	local comboPoints = GetComboPoints("player", "target")
-	return spells[key][comboPoints + 1]
 end
 
 local function getSpellList()
